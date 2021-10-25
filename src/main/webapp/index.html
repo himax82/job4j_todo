@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="index.js"></script>
+
+    <title>Список дел</title>
+</head>
+
+<body>
+<div class="container-md">
+    <div class="card border">
+        <div class="card-body">
+            <form>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Что нужно сделать</label>
+                    <textarea class="form-control" id="description" rows="3"></textarea>
+                </div>
+                <button type="reset" id="add" class="btn btn-success fw-light btn-sm">Добавить дело</button>
+            </form>
+            <br>
+            <br>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Покать все</label>
+            </div>
+            <table class="table border-light table-hover table-striped">
+                <thead class="table-light">
+                <tr>
+                    <th>Список дел</th>
+                    <th>Готовность</th>
+                </tr>
+                </thead>
+                <tbody id="table">
+                <tr>
+                    <td align="right">Пожалуйста</td>
+                    <td>подождите ...</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

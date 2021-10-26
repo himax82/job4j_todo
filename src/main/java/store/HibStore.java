@@ -27,22 +27,18 @@ public class HibStore implements Store, AutoCloseable {
 
     @Override
     public Item addItem(Item item) {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        session.save(item);
-        session.getTransaction().commit();
-        session.close();
-        return item;
+        return tx(session -> {
+            session.save(item);
+            return item;
+        });
     }
 
     @Override
     public User addUser(User user) {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();
-        session.close();
-        return user;
+        return tx(session -> {
+            session.save(user);
+            return user;
+                });
     }
 
     @Override

@@ -13,7 +13,7 @@ public class Item {
     @JsonProperty
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @JsonProperty
     private String description;
@@ -62,17 +62,16 @@ public class Item {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Item)) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Item item = (Item) o;
-        return Objects.equals(id, item.id) && Objects.equals(description, item.description)
-                && Objects.equals(created, item.created) && Objects.equals(done, item.done);
+        return id == item.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, created, done);
+        return Objects.hash(id);
     }
 
     @Override

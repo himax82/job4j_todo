@@ -11,7 +11,7 @@ public class UpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
-        HibStore store = new HibStore();
+        HibStore store = HibStore.HibStoreHolder.HOLDER_INSTANCE;
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
         String id = req.getParameter("id");

@@ -18,7 +18,7 @@ public class AffairsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
-        HibStore store = new HibStore();
+        HibStore store = HibStore.HibStoreHolder.HOLDER_INSTANCE;
         List<Item> itemList = store.findAll(user.getId());
         ObjectMapper mapper = new ObjectMapper();
         String itemsAsString = mapper.writeValueAsString(itemList);

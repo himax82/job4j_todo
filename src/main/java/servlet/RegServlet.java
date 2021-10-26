@@ -13,7 +13,7 @@ public class RegServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HibStore store = new HibStore();
+        HibStore store = HibStore.HibStoreHolder.HOLDER_INSTANCE;
         System.out.println("Проверка емейла" + req.getParameter("email"));
         store.addUser(new User(req.getParameter("email"),
                     req.getParameter("name"),

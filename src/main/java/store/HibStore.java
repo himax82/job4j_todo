@@ -20,9 +20,21 @@ public class HibStore implements Store, AutoCloseable {
     private final SessionFactory sf = new MetadataSources(registry)
             .buildMetadata().buildSessionFactory();
 
+    private HibStore() {
+    }
+
     @Override
     public void close() {
         StandardServiceRegistryBuilder.destroy(registry);
+    }
+
+
+    public static class HibStoreHolder {
+        public static final HibStore HOLDER_INSTANCE = new HibStore();
+    }
+
+    public static HibStore getInstance() {
+        return HibStoreHolder.HOLDER_INSTANCE;
     }
 
     @Override
@@ -42,11 +54,13 @@ public class HibStore implements Store, AutoCloseable {
     }
 
     @Override
-    public void update(Integer id) {
+    public void update(int id) {
         Session session = sf.openSession();
         session.beginTransaction();
-        Item item = session.get(Item.class, id);
-        item.setDone(!item.getDone());
+        Query query = session.createQuery("update model.Item set done=:done where id=:id");
+        query.setParameter("id", id);
+        query.setParameter("done", true);
+        query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }

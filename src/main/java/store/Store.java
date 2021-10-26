@@ -11,7 +11,7 @@ public interface Store {
 
     User addUser(User user);
 
-    void update(Integer id);
+    void update(int id);
 
     List<Item> findAll(int id);
 

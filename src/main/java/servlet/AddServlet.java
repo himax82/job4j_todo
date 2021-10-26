@@ -1,6 +1,7 @@
 package servlet;
 
 import model.Item;
+import model.User;
 import org.hibernate.HibernateException;
 import store.HibStore;
 
@@ -18,10 +19,11 @@ public class AddServlet extends HttpServlet {
         HibStore store = new HibStore();
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
+        User user = (User) req.getSession().getAttribute("user");
         String description = req.getParameter("description");
-        Item item = new Item(description, new Timestamp(System.currentTimeMillis()), false);
+        Item item = new Item(description, new Timestamp(System.currentTimeMillis()), false, user);
         try {
-            store.add(item);
+            store.addItem(item);
         } catch (HibernateException e) {
             System.out.println("Задача не добавлена");
         }

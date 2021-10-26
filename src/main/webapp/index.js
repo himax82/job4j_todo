@@ -1,11 +1,12 @@
 let show = false;
 $(document).ready(function () {
     build();
+    auth();
 
     $('#add').click(function () {
         validateAndAdd();
         setTimeout(function () {
-            build(show);
+            build();
         }, 2000);
     });
 
@@ -34,21 +35,33 @@ function addAffairs() {
         console.log("Error Sending data");
     });
 }
+function auth() {
+    $.getJSON("http://localhost:8080/todo/auth.do"
+    ).done(function (response) {
+        $('#user').text('Пользователь ' + response.name +' | ');
+        console.log("Response Data: " + response);
+    }).fail(function (err) {
+        alert('Request Failed!');
+        console.log("Request Failed: " + err);
+    });
+}
 
 function build() {
-    $.getJSON("http://localhost:8080/todo/affair"
+    $.post("http://localhost:8080/todo/affair.do"
     ).done(function (response) {
         let affair = [];
         $.each(response, function (key, value) {
             if (show === true) {
-                    affair.push('<tr><td>' + value.description + '</td><td>' +
-                        '<div class="form-check">' +
+                    affair.push('<tr><td>' + value.description + '</td>' +
+                        '<td>' + value.user.name + '</td>' +
+                        '<td>' + '<div class="form-check">' +
                         '<input class="form-check-input" type="checkbox" onchange = "update(this.id)" value="" id="' + value.id + '">' +
                         '</div></td></tr>');
             } else {
                 if (value.done === false) {
-                    affair.push('<tr><td>' + value.description + '</td><td>' +
-                        '<div class="form-check">' +
+                    affair.push('<tr><td>' + value.description + '</td>' +
+                        '<td>' + value.user.name + '</td>' +
+                        '<td>' + '<div class="form-check">' +
                         '<input class="form-check-input" type="checkbox" onchange = "update(this.id)" value="" id="' + value.id + '">' +
                         '</div></td></tr>');
                 }

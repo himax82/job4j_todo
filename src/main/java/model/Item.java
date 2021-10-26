@@ -23,13 +23,26 @@ public class Item {
     @JsonProperty
     private Boolean done;
 
-    public Item(String description, Timestamp created, Boolean done) {
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Item(String description, Timestamp created, Boolean done, User user) {
         this.description = description;
         this.created = created;
         this.done = done;
+        this.user = user;
     }
 
     public Item() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getId() {

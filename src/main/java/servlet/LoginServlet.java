@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        HibStore store = HibStore.HibStoreHolder.HOLDER_INSTANCE;
+        HibStore store = HibStore.getInstance();
         User user = store.findByEmail(email);
         if (user.getPassword().equals(password)) {
             HttpSession session = req.getSession();

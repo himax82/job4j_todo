@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +21,8 @@ public class Item {
     @JsonProperty
     private String description;
 
-    private Timestamp created;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
     @JsonProperty
     private Boolean done;
@@ -32,7 +34,7 @@ public class Item {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Category> categories = new ArrayList<>();
 
-    public Item(String description, Timestamp created, Boolean done, User user, List<Category> categories) {
+    public Item(String description, Date created, Boolean done, User user, List<Category> categories) {
         this.description = description;
         this.created = created;
         this.done = done;
@@ -63,11 +65,11 @@ public class Item {
         this.done = done;
     }
 
-    public Timestamp getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

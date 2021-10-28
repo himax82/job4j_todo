@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,11 +29,15 @@ public class Item {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Item(String description, Timestamp created, Boolean done, User user) {
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Category> categories = new ArrayList<>();
+
+    public Item(String description, Timestamp created, Boolean done, User user, List<Category> categories) {
         this.description = description;
         this.created = created;
         this.done = done;
         this.user = user;
+        this.categories = categories;
     }
 
     public Item() {
@@ -57,6 +63,26 @@ public class Item {
         this.done = done;
     }
 
+    public Timestamp getCreated() {
+        return created;
+    }
+
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public void addCategory(Category category) {
+        this.categories.add(category);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -77,6 +103,7 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" + "id=" + id + ", description='" + description + '\''
-                + ", created=" + created + ", done=" + done + '}';
+               + ", created=" + created + ", done=" + done
+                + ", user=" + user + ", categories=" + categories + '}';
     }
 }

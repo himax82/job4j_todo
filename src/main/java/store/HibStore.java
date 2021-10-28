@@ -1,5 +1,6 @@
 package store;
 
+import model.Category;
 import model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +11,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import model.Item;
 import org.hibernate.query.Query;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
@@ -68,10 +70,16 @@ public class HibStore implements Store, AutoCloseable {
     @Override
     public List<Item> findAll(int id) {
         return tx(session -> {
-            final Query query = session.createQuery("from model.Item where user.id=:id");
+            final Query query = session.createQuery("select distinct i from model.Item i"
+                    + " left join fetch i.categories c where i.user.id = :id");
                     query.setParameter("id", id);
                     return query.list();
         });
+    }
+
+    @Override
+    public Collection<Category> findAllCategories() {
+         return tx(session -> session.createQuery("from model.Category").list());
     }
 
     @Override

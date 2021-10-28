@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             if (userFind.getPassword().equals(user.getPassword())) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", userFind);
-                writer.print("200 OK");
+                writer.print("200");
             } else {
                 writer.print("407");
             }

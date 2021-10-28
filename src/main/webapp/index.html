@@ -35,6 +35,16 @@
                 </div>
                 <button type="reset" id="add" class="btn btn-success fw-light btn-sm">Добавить дело</button>
             </form>
+            <div class="form-row justify-content-md-center">
+                <label class="col-form-label col-sm-0 text-info" for="selectCategories" style="font-weight: 800">Категории:</label>
+                <div class="col-sm-5">
+                    <select class="form-control" name="selectCategories" id="selectCategories" multiple required
+                            oninvalid="this.setCustomValidity('Выберете категорию')"
+                            oninput="this.setCustomValidity('')">
+                    </select>
+                </div>
+            </div>
+
             <br>
             <br>
             <div class="form-check form-switch">
@@ -44,8 +54,9 @@
             <table class="table border-light table-hover table-striped">
                 <thead class="table-light">
                 <tr>
-                    <th>Список дел</th>
+                    <th>Задача</th>
                     <th>Пользователь</th>
+                    <th>Категория</th>
                     <th>Готовность</th>
                 </tr>
                 </thead>

@@ -36,6 +36,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>CategotiesServlet</servlet-name>
+    <servlet-class>servlet.CategoriesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategotiesServlet</servlet-name>
+    <url-pattern>/categories.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>RegServlet</servlet-name>
     <servlet-class>servlet.RegServlet</servlet-class>
   </servlet>

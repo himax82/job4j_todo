@@ -20,9 +20,9 @@ function auth() {
         }),
         dataType: 'json'
     }).done(function (data) {
-        if (data === '200 OK') {
+        if (data == '200') {
             window.location.href = "http://localhost:8080/todo/index.html";
-        } else if (data === '407') {
+        } else if (data == '407') {
             $('#invalid').text('Неправильный пароль');
             console.log(data);
         } else  {

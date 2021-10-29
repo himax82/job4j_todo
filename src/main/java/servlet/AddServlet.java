@@ -33,14 +33,11 @@ public class AddServlet extends HttpServlet {
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(
                 resp.getOutputStream(), StandardCharsets.UTF_8));
         Item item = GSON.fromJson(req.getReader(), Item.class);
-        System.out.println(item);
         item.setUser(user);
         item.setCreated(Timestamp.valueOf(LocalDateTime.now()));
         item.setDone(false);
-        System.out.println(item);
         try {
             store.addItem(item);
-            System.out.println(item);
             writer.print("200");
         } catch (HibernateException e) {
             writer.print("409");

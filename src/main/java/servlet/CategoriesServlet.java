@@ -18,11 +18,9 @@ public class CategoriesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Зашли в сервлет");
         resp.setContentType("application/json; charset=utf-8");
         OutputStream output = resp.getOutputStream();
         String json = GSON.toJson(HibStore.getInstance().findAllCategories());
-        System.out.println("Получили список категорий");
         output.write(json.getBytes(StandardCharsets.UTF_8));
         output.flush();
         output.close();

@@ -21,7 +21,6 @@ public class RegServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Hello");
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(
                 resp.getOutputStream(), StandardCharsets.UTF_8));
         User user = GSON.fromJson(req.getReader(), User.class);
